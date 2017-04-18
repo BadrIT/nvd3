@@ -132,7 +132,7 @@ module.exports = function(grunt) {
                         'bower_components/d3/d3.js',
                         'src/*.js',
                         'src/models/*.js',
-                        'test/mocha/*.coffee'
+                        'test/mocha/core.coffee'
                     ],
                     exclude: [
                         'src/intro.js',
