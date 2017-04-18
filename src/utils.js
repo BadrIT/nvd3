@@ -87,7 +87,7 @@ nv.utils.getColor = function(color) {
 
     //if passed an array, turn it into a color scale
     } else if(nv.utils.isArray(color)) {
-        var color_scale = d3.scale.ordinal().range(color);
+        var color_scale = d3.scaleOrdinal().range(color);
         return function(d, i) {
             var key = i === undefined ? d : i;
             return d.color || color_scale(key);
@@ -108,8 +108,8 @@ Default color chooser uses a color scale of 20 colors from D3
  */
 nv.utils.defaultColor = function() {
     // get range of the scale so we'll turn it into our own function.
-    return nv.utils.getColor(d3.scale.category20().range());
-};
+    return nv.utils.getColor(d3.scaleOrdinal(d3.schemeCategory20));
+};0
 
 
 /*
@@ -119,7 +119,7 @@ looks for a corresponding color from the dictionary
 nv.utils.customTheme = function(dictionary, getKey, defaultColors) {
     // use default series.key if getKey is undefined
     getKey = getKey || function(series) { return series.key };
-    defaultColors = defaultColors || d3.scale.category20().range();
+    defaultColors = defaultColors || d3.scaleOrdinal(d3.schemeCategory20);
 
     // start at end of default color list and walk back to index 0
     var defIndex = defaultColors.length;
