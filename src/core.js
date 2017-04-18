@@ -57,6 +57,10 @@ if (nv.dev) {
         nv.logs.totalTime = nv.logs.endTime - nv.logs.startTime;
         nv.log('total', nv.logs.totalTime); // used for development, to keep track of graph generation times
     });
+}else{
+    // Create default functions for render_start and render_end
+    nv.dispatch.on('render_start',function(){});
+    nv.dispatch.on('render_end',function(){});
 }
 
 // Logs all arguments, and returns the last so you can test things in place

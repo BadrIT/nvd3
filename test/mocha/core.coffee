@@ -26,4 +26,4 @@ describe 'NVD3', ->
       dispatchDefaults = ['render_start', 'render_end']
       for event in dispatchDefaults
         do (event) ->
-          it "#{event} event", -> assert.isFunction nv.dispatch[event]
+          it "#{event} event", -> assert.isFunction nv.dispatch.on(event)
