@@ -592,7 +592,7 @@ nv.utils.inheritOptions = function(target, source) {
 Runs common initialize code on the svg before the chart builds
 */
 nv.utils.initSVG = function(svg) {
-    svg.classed({'nvd3-svg':true});
+    svg.classed('nvd3-svg',true);
 };
 
 
