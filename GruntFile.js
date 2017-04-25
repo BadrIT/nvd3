@@ -134,7 +134,8 @@ module.exports = function(grunt) {
                         'src/models/*.js',
                         'test/mocha/core.coffee',
                         'test/mocha/test-utils.coffee',
-                        'test/mocha/utils.coffee'
+                        'test/mocha/utils.coffee',
+			'test/mocha/legend.coffee'
                     ],
                     exclude: [
                         'src/intro.js',
