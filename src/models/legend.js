@@ -100,18 +100,18 @@ nv.models.legend = function () {
                 .attr('dx', '8');
             
             var seriesText = seriesEnter.select('text.nv-legend-text');
-            
             series.merge(seriesEnter)
                 .on('mouseover', function (d, i) {
-                    dispatch.legendMouseover(d, i);  //TODO: Make consistent with other event objects
+                    dispatch.call('legendMouseover' , this, d, i);
+                    //TODO: Make consistent with other event objects
                 })
                 .on('mouseout', function (d, i) {
-                    dispatch.legendMouseout(d, i);
+                    dispatch.call('legendMouseout' , this, d, i);
                 })
                 .on('click', function (d, i) {
-                    dispatch.legendClick(d, i);
+                    dispatch.call('legendClick' , this, d, i);
                     // make sure we re-get data in case it was modified
-                    var data = series.data();
+                    var data = series.merge(seriesEnter).data();
                     if (updateState) {
                         if (vers == 'classic') {
                             if (radioButtonMode) {
@@ -156,7 +156,7 @@ nv.models.legend = function () {
                                 }
                             }
                         }
-                        dispatch.stateChange({
+                        dispatch.call('stateChange' ,this,{
                             disabled: data.map(function (d) {
                                 return !!d.disabled
                             }),
@@ -164,16 +164,15 @@ nv.models.legend = function () {
                                 return !!d.disengaged
                             })
                         });
-
                     }
                 })
                 .on('dblclick', function (d, i) {
                     if (enableDoubleClick) {
                         if (vers == 'furious' && expanded) return;
-                        dispatch.legendDblclick(d, i);
+                        dispatch.call('legendDblclick' ,this,d, i);
                         if (updateState) {
                             // make sure we re-get data in case it was modified
-                            var data = series.data();
+                            var data = series.merge(seriesEnter).data();
                             //the default behavior of NVD3 legends, when double clicking one,
                             // is to set all other series' to false, and make the double clicked series enabled.
                             data.forEach(function (series) {
@@ -182,7 +181,7 @@ nv.models.legend = function () {
                             });
                             d.disabled = false;
                             if (vers == 'furious') d.userDisabled = d.disabled;
-                            dispatch.stateChange({
+                            dispatch.call('stateChange' ,this,{
                                 disabled: data.map(function (d) {
                                     return !!d.disabled
                                 })
