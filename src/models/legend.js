@@ -70,23 +70,20 @@ nv.models.legend = function () {
                     .style('stroke-width', 2)
                     .attr('class', 'nv-legend-symbol')
                     .attr('r', 5);
-
-                seriesShape = series.select('.nv-legend-symbol');
+                seriesShape = series.merge(seriesEnter).select('.nv-legend-symbol');
             } else if (vers == 'furious') {
                 seriesEnter.append('rect')
                     .style('stroke-width', 2)
                     .attr('class', 'nv-legend-symbol')
                     .attr('rx', 3)
                     .attr('ry', 3);
-                seriesShape = series.select('.nv-legend-symbol');
-
+                seriesShape = series.merge(seriesEnter).select('.nv-legend-symbol');
                 seriesEnter.append('g')
                     .attr('class', 'nv-check-box')
                     .property('innerHTML', '<path d="M0.5,5 L22.5,5 L22.5,26.5 L0.5,26.5 L0.5,5 Z" class="nv-box"></path><path d="M5.5,12.8618467 L11.9185089,19.2803556 L31,0.198864511" class="nv-check"></path>')
                     .attr('transform', 'translate(-10,-8)scale(0.5)');
 
-                var seriesCheckbox = series.select('.nv-check-box');
-
+                var seriesCheckbox = series.merge(seriesEnter).select('.nv-check-box');
                 seriesCheckbox.each(function (d, i) {
                     d3.select(this).selectAll('path')
                         .attr('stroke', setTextColor(d, i));
@@ -99,7 +96,7 @@ nv.models.legend = function () {
                 .attr('dy', '.32em')
                 .attr('dx', '8');
             
-            var seriesText = seriesEnter.select('text.nv-legend-text');
+            var seriesText = series.merge(seriesEnter).select('text.nv-legend-text');
             series.merge(seriesEnter)
                 .on('mouseover', function (d, i) {
                     dispatch.call('legendMouseover' , this, d, i);
@@ -193,8 +190,7 @@ nv.models.legend = function () {
             series.merge(seriesEnter).classed('nv-disabled', function (d) {
                 return d.userDisabled
             });
-            series.exit().remove();
-            
+            series.merge(seriesEnter).exit().remove();
             seriesText
                 .attr('fill', setTextColor)
                 .text(function (d) {
