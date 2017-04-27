@@ -97,7 +97,7 @@ describe 'NVD3', ->
         sampleData1[2].disabled.should.equal true
 
       it 'updating legend data does not break double click (issue 784)', ->
-        builder.updateData sampleData2
+        builder.build {}, sampleData2 // Used build() method rather than updateData()
 
         legendItems = builder.$ '.nv-legend .nv-series'
 
