@@ -31,12 +31,13 @@ module.exports = function(grunt) {
                 },
                 src: [
                     'src/core.js',
+                    'src/extra_d3_componenets/*.js',
                     'src/dom.js',
                     'src/interactiveLayer.js',
                     'src/tooltip.js',
                     'src/utils.js',
                     //Include all files in src/models
-                    'src/models/*.js'
+                    'src/models/*.js',
                     // example to exclude files: '!src/models/excludeMe*'
                 ],
                 dest: 'build/nv.d3.js'
@@ -126,16 +127,19 @@ module.exports = function(grunt) {
                     preprocessors: {
                         'src/*.js': ['coverage'],
                         'src/models/*.js': ['coverage'],
+                        'src/extra_d3_componenets/*.js': ['coverage'],
                         'test/mocha/*.coffee': ['coffee']
                     },
                     files: [
                         'bower_components/d3/d3.js',
                         'src/*.js',
+                        'src/extra_d3_componenets/*.js',
                         'src/models/*.js',
                         'test/mocha/core.coffee',
                         'test/mocha/test-utils.coffee',
                         'test/mocha/utils.coffee',
-			'test/mocha/legend.coffee'
+                        'test/mocha/legend.coffee',
+                        'test/mocha/new_axis.coffee'
                     ],
                     exclude: [
                         'src/intro.js',

@@ -5,8 +5,8 @@ nv.models.axis = function() {
     // Public Variables with Default Settings
     //------------------------------------------------------------
 
-    var axis = d3.svg.axis();
-    var scale = d3.scale.linear();
+    // var axis = d3.svg.axis();
+    var scale = d3.scaleLinear();
 
     var margin = {top: 0, right: 0, bottom: 0, left: 0}
         , width = 75 //only used for tickLabel currently
@@ -23,9 +23,8 @@ nv.models.axis = function() {
         , duration = 250
         , dispatch = d3.dispatch('renderEnd')
         ;
-    axis
-        .scale(scale)
-        .orient('bottom')
+    
+    var axis = d3.axisBottom(scale)
         .tickFormat(function(d) { return d })
     ;
 
@@ -46,7 +45,7 @@ nv.models.axis = function() {
             var wrap = container.selectAll('g.nv-wrap.nv-axis').data([data]);
             var wrapEnter = wrap.enter().append('g').attr('class', 'nvd3 nv-wrap nv-axis');
             var gEnter = wrapEnter.append('g');
-            var g = wrap.select('g');
+            var g = wrapEnter.select('g');
 
             if (ticks !== null)
                 axis.ticks(ticks);
